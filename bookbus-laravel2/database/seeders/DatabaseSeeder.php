@@ -2,8 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,94 +14,174 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-       $villes = [
-            ['name' => 'Casablanca'],
-            ['name' => 'Marrakech'],
-            ['name' => 'Agadir'],
-            ['name' => 'Settat']
-        ];
-        foreach ($villes as $v) {
-            DB::table('villes')->insert(array_merge($v, ['created_at' => now()]));
-        }
-
-         $casaId = DB::table('villes')->where('name', 'Casablanca')->first()->id;
-        $kechId = DB::table('villes')->where('name', 'Marrakech')->first()->id;
-        $settatId = DB::table('villes')->where('name', 'Settat')->first()->id;
-
-        DB::table('gares')->insert([
-            ['nom' => 'Gare Oulad Ziane', 'adresse' => 'Casablanca Center', 'ville_id' => $casaId],
-            ['nom' => 'Gare Casa Voyageurs', 'adresse' => 'Belvédère', 'ville_id' => $casaId], 
-            ['nom' => 'Gare Marrakech (Sidi Mimoun)', 'adresse' => 'Marrakech Center', 'ville_id' => $kechId],
-            ['nom' => 'Gare Settat Centrale', 'adresse' => 'Settat Center', 'ville_id' => $settatId],
-        ]);
-
-         DB::table('users')->insert([
+     
+         $adminId = DB::table('users')->insertGetId([
             'name' => 'Admin SATAS',
             'email' => 'admin@satas.ma',
             'password' => Hash::make('password'),
             'role' => 'admin',
-            'phone' => '0522000000',
-            'created_at' => now()
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
-        for ($i = 1; $i <= 15; $i++) {
-            DB::table('users')->insert([
-                'name' => "Chauffeur Satas $i",
+        $driverIds = [];
+        for ($i = 1; $i <= 10; $i++) {
+            $driverIds[] = DB::table('users')->insertGetId([
+                'name' => "Driver $i",
                 'email' => "driver$i@satas.ma",
                 'password' => Hash::make('password'),
                 'role' => 'driver',
-                'phone' => "06610000$i",
-                'created_at' => now()
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
         }
 
-         for ($i = 1; $i <= 20; $i++) {
-            DB::table('buses')->insert([
-                'matricule' => "SATAS-BUS-$i",
-                'capacite' => 50,
-                'type' => $i <= 10 ? 'Premium' : 'Standard',
-                'statut' => 'enservice',
-                'created_at' => now()
+        $clientIds = [];
+        for ($i = 1; $i <= 20; $i++) {
+            $clientIds[] = DB::table('users')->insertGetId([
+                'name' => "Client $i",
+                'email' => "client$i@satas.ma",
+                'password' => Hash::make('password'),
+                'role' => 'client',
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
         }
 
-         $routeId = DB::table('routes')->insertGetId([
-            'nom' => 'L101: Casa -> Settat -> Marrakech',
-            'description' => '  '
+         $employeeIds = [];
+        foreach ($driverIds as $index => $uid) {
+            $employeeIds[] = DB::table('employees')->insertGetId([
+                'user_id' => $uid,
+                'license_number' => "LIC-DRIVER-$index",
+                'role' => 'driver',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
+
+         $busIds = [];
+        for ($i = 1; $i <= 10; $i++) {
+            $busIds[] = DB::table('buses')->insertGetId([
+                'plate_number' => "BUS-$i",
+                'capacity' => 50,
+                'type' => $i <= 5 ? 'Premium' : 'Standard',
+                'status' => 'active',
+                'amenities' => json_encode(['wifi' => true, 'usb' => true, 'wc' => true]),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
+
+         $routes = [];
+        $routes[] = DB::table('routes')->insertGetId([
+            'route_code' => 'R101',
+            'name' => 'Casablanca -> Settat -> Marrakech',
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
- for ($i = 1; $i <= 20; $i++) {
-    DB::table('buses')->insert([
-        'matricule' => "SATAS-BUS-$i",
-        'capacite' => 50,
-        'type' => $i <= 10 ? 'Premium' : 'Standard',
-        'statut' => 'enservice',
-         'amenities' => json_encode([
-            'wifi' => $i <= 10, 
-            'usb' => true, 
-            'wc' => $i <= 10
-        ]),
-        'created_at' => now()
-    ]);
+
+        $routes[] = DB::table('routes')->insertGetId([
+            'route_code' => 'R102',
+            'name' => 'Agadir -> Marrakech -> Casablanca',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+         $stations = [
+            ['name' => 'Casablanca Center'], 
+            ['name' => 'Settat Central'], 
+            ['name' => 'Marrakech Center'], 
+            ['name' => 'Agadir Terminal']
+        ];
+
+        $stationIds = [];
+        foreach ($stations as $station) {
+            $stationIds[] = DB::table('stops')->insertGetId([
+                'route_id' => $routes[0],
+                'station_id' => null,  
+                'order' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
+
+         $segmentIds = [];
+         $segmentIds[] = DB::table('segments')->insertGetId([
+            'route_id' => $routes[0],
+            'departure_stop_id' => $stationIds[0],
+            'arrival_stop_id' => $stationIds[1],
+            'price' => 50,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $segmentIds[] = DB::table('segments')->insertGetId([
+            'route_id' => $routes[0],
+            'departure_stop_id' => $stationIds[1],
+            'arrival_stop_id' => $stationIds[2],
+            'price' => 70,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+         $scheduleIds = [];
+        $scheduleIds[] = DB::table('schedules')->insertGetId([
+            'route_id' => $routes[0],
+            'departure_time' => '08:00:00',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $scheduleIds[] = DB::table('schedules')->insertGetId([
+            'route_id' => $routes[1],
+            'departure_time' => '09:00:00',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+         $tripIds = [];
+        $tripIds[] = DB::table('trips')->insertGetId([
+            'schedule_id' => $scheduleIds[0],
+            'trip_date' => Carbon::today(),
+            'status' => 'scheduled',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $tripIds[] = DB::table('trips')->insertGetId([
+            'schedule_id' => $scheduleIds[1],
+            'trip_date' => Carbon::tomorrow(),
+            'status' => 'scheduled',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+         foreach ($tripIds as $index => $tripId) {
+            DB::table('assignments')->insert([
+                'trip_id' => $tripId,
+                'bus_id' => $busIds[$index],
+                'driver_id' => $employeeIds[$index],
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
+
+         $seatNumber = 1;
+        foreach ($tripIds as $tripId) {
+            foreach ($clientIds as $clientId) {
+                DB::table('bookings')->insert([
+                    'user_id' => $clientId,
+                    'trip_id' => $tripId,
+                    'segment_id' => $segmentIds[array_rand($segmentIds)],
+                    'seat_number' => $seatNumber,
+                    'final_price' => rand(40, 100),
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+                $seatNumber++;
+            }
+        }
+
+        $this->command->info(' database seeded with Users, Employees, Routes, Stops, Segments, Buses, Schedules, Trips, Assignments, and Bookings!');
+    }
 }
-        $gCasa = DB::table('gares')->where('nom', 'Gare Oulad Ziane')->first()->id;
-        $gSettat = DB::table('gares')->where('nom', 'Gare Settat Centrale')->first()->id;
-        $gKech = DB::table('gares')->where('nom', 'Gare Marrakech (Sidi Mimoun)')->first()->id;
-
-        $e1 = DB::table('etapes')->insertGetId(['route_id' => $routeId, 'gare_id' => $gCasa, 'ordre' => 1, 'heure_passage' => '08:00:00']);
-        $e2 = DB::table('etapes')->insertGetId(['route_id' => $routeId, 'gare_id' => $gSettat, 'ordre' => 2, 'heure_passage' => '09:30:00']);
-        $e3 = DB::table('etapes')->insertGetId(['route_id' => $routeId, 'gare_id' => $gKech, 'ordre' => 3, 'heure_passage' => '12:00:00']);
- 
-        $busId = DB::table('buses')->first()->id;
-
-        DB::table('segments')->insert([
-          
-            ['tarif' => 120.00, 'duree_estimee' => '04:00:00', 'distance_km' => 240, 'bus_id' => $busId, 'depart_etape_id' => $e1, 'arrivee_etape_id' => $e3],
-             ['tarif' => 40.00, 'duree_estimee' => '01:30:00', 'distance_km' => 80, 'bus_id' => $busId, 'depart_etape_id' => $e1, 'arrivee_etape_id' => $e2],
-            
-            ['tarif' => 90.00, 'duree_estimee' => '02:30:00', 'distance_km' => 160, 'bus_id' => $busId, 'depart_etape_id' => $e2, 'arrivee_etape_id' => $e3],
-        ]);
-
-        echo "SATAS Database is ready with multiple stations per city!";
-    }
-    }
-

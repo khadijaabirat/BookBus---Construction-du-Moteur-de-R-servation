@@ -13,19 +13,16 @@ return new class extends Migration
     {
         Schema::create('segments', function (Blueprint $table) {
             $table->id();
-            $table->decimal('tarif', 8, 2);
-    $table->time('duree_estimee');
-    $table->float('distance_km');
-    $table->foreignId('bus_id')->constrained();
-    $table->unsignedBigInteger('depart_etape_id');
-    $table->unsignedBigInteger('arrivee_etape_id');
-    
-    $table->foreign('depart_etape_id')->references('id')->on('etapes');
-    $table->foreign('arrivee_etape_id')->references('id')->on('etapes');
+            $table->float('tarif', 8, 2)->index();
+            $table->time('duree_estimee'); 
+            $table->float('distance_km');
+            $table->foreignId('bus_id')->constrained()->onDelete('cascade');
+             $table->foreignId('programme_id')->constrained()->onDelete('cascade');
+             $table->foreignId('etape_depart_id')->constrained('etapes')->onDelete('cascade');
+    $table->foreignId('etape_arrivee_id')->constrained('etapes')->onDelete('cascade');
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      */

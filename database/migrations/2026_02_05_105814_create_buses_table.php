@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('etapes', function (Blueprint $table) {
+        Schema::create('buses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('route_id')->constrained()->onDelete('cascade');
-    $table->foreignId('gare_id')->constrained()->onDelete('cascade');
-    $table->integer('ordre');  
-    $table->time('heure_passage');
+            $table->string('matricule');
+            $table->integer('capacite');
+            $table->enum('statut',['disponible', 'en_panne', 'en_route']);
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('etapes');
+        Schema::dropIfExists('buses');
     }
 };

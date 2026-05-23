@@ -63,4 +63,16 @@ class BusController extends Controller
         $bus->delete();
         return redirect()->route('admin.buses.index')->with('success', 'Bus supprimé avec succès.');
     }
+
+    public function toggleMaintenance(Bus $bus)
+    {
+        if ($bus->statut === 'en_maintenance') {
+            $bus->update(['statut' => 'disponible']);
+            $msg = "Bus {$bus->matricule} remis en service.";
+        } else {
+            $bus->update(['statut' => 'en_maintenance']);
+            $msg = "Bus {$bus->matricule} mis en maintenance. Il ne sera plus disponible pour les réservations.";
+        }
+        return back()->with('success', $msg);
+    }
 }

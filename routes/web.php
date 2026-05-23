@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\RouteController as AdminRouteController;
 use App\Http\Controllers\Admin\TripController as AdminTripController;
 use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\BookingController as AdminBookingController;
+use App\Http\Controllers\Admin\AssignmentController;
 use Illuminate\Support\Facades\Route;
 
  Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -43,6 +44,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     
     Route::resource('buses', BusController::class);
+    Route::patch('buses/{bus}/maintenance', [BusController::class, 'toggleMaintenance'])->name('buses.maintenance');
     Route::resource('routes', AdminRouteController::class);
     Route::resource('trips', AdminTripController::class);
     Route::resource('employees', EmployeeController::class);
@@ -50,6 +52,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('bookings', [AdminBookingController::class, 'index'])->name('bookings.index');
     Route::get('bookings/{id}', [AdminBookingController::class, 'show'])->name('bookings.show');
     Route::post('bookings/{id}/cancel', [AdminBookingController::class, 'cancel'])->name('bookings.cancel');
+
+    Route::get('assignments/create', [AssignmentController::class, 'create'])->name('assignments.create');
+    Route::post('assignments', [AssignmentController::class, 'store'])->name('assignments.store');
 });
 
 require __DIR__.'/auth.php';

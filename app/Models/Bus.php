@@ -6,9 +6,25 @@ use Illuminate\Database\Eloquent\Model;
 
 class Bus extends Model
 {
-    protected $fillable = ['matricule', 'capacite', 'statut'];
-    public function segment(){
-        return $this->hasMany(Segment::class);
+    protected $fillable = [
+        'matricule',
+        'capacite',
+        'statut',
+        'type',
+        'amenities'
+    ];
 
+    protected $casts = [
+        'amenities' => 'array',
+    ];
+
+    public function segments()
+    {
+        return $this->hasMany(Segment::class);
+    }
+    
+    public function assignments()
+    {
+        return $this->hasMany(Assignment::class);
     }
 }

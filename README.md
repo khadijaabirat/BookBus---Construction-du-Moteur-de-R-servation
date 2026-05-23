@@ -233,7 +233,17 @@ resources/
 
 ---
 
-## Author
+
+## Application Preview
+<img width="1763" height="2534" alt="Capture d’écran_23-5-2026_184018_127 0 0 1" src="https://github.com/user-attachments/assets/59ae5dd7-861f-4500-99be-22ac2d9a6dc6" />
+<img width="1763" height="1362" alt="Capture d’écran_23-5-2026_17535_127 0 0 1" src="https://github.com/user-attachments/assets/130cf769-3987-4dbd-9d48-2507a7d3b068" />
+<img width="1763" height="938" alt="Capture d’écran_23-5-2026_174836_127 0 0 1" src="https://github.com/user-attachments/assets/0cb29a97-447f-4d05-92a5-66d5490d85bf" />
+<img width="1763" height="1214" alt="Capture d’écran_23-5-2026_175342_127 0 0 1" src="https://github.com/user-attachments/assets/9c086adf-4d5a-4fd5-806e-ea528993231b" />
+<img width="740" height="861" alt="Capture d’écran 2026-05-23 181436" src="https://github.com/user-attachments/assets/e2b8f7cc-67dd-48e8-8bfe-b2969970566b" />
+<img width="1763" height="971" alt="Capture d’écran_23-5-2026_181655_127 0 0 1" src="https://github.com/user-attachments/assets/c19d62c2-b93e-4954-aa21-52acd02e097e" />
+<img width="1763" height="1362" alt="Capture d’écran_23-5-2026_193329_127 0 0 1" src="https://github.com/user-attachments/assets/eeca37e1-ddbc-4be4-8088-f5cf7f3469bc" />
+<img width="1763" height="2534" alt="Capture d’écran_23-5-2026_184018_127 0 0 1" src="https://github.com/user-attachments/assets/510da0a2-64da-43d1-b4ac-07d74aedaefc" />
+
 
 **Khadija Abirat**
 Full-Stack Developer

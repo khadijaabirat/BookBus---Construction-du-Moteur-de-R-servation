@@ -61,7 +61,13 @@
                     </td>
                     <td class="px-6 py-4 text-right">
                         <div class="flex items-center justify-end gap-2">
-                            <a href="#" class="text-blue-600 hover:text-blue-800 p-1"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="{{ route('admin.buses.edit', $bus) }}" class="text-blue-600 hover:text-blue-800 p-1"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <form action="{{ route('admin.buses.maintenance', $bus) }}" method="POST" class="inline">
+                                @csrf @method('PATCH')
+                                <button type="submit" class="text-xs px-2 py-1 rounded {{ $bus->statut === 'en_maintenance' ? 'bg-green-100 text-green-700' : 'bg-orange-100 text-orange-700' }}">
+                                    {{ $bus->statut === 'en_maintenance' ? 'Remettre en service' : 'Maintenance' }}
+                                </button>
+                            </form>
                             <form action="{{ route('admin.buses.destroy', $bus) }}" method="POST" class="inline" onsubmit="return confirm('Êtes-vous sûr ?');">
                                 @csrf @method('DELETE')
                                 <button type="submit" class="text-red-600 hover:text-red-800 p-1"><i class="fa-solid fa-trash"></i></button>

@@ -12,7 +12,7 @@ class BookingController extends Controller
     {
         $bookings = Reservation::with(['user', 'segment.depart.gare.ville', 'segment.arrivee.gare.ville'])
             ->orderBy('created_at', 'desc')
-            ->get();
+            ->paginate(15);
         return view('admin.bookings.index', compact('bookings'));
     }
 

@@ -10,7 +10,9 @@ class TripController extends Controller
 {
     public function index()
     {
-        $trips = Programme::with(['route', 'bus'])->get();
+        $trips = Programme::with(['route', 'assignments.bus', 'assignments.employee'])
+            ->orderBy('jour_depart', 'desc')
+            ->paginate(15);
         return view('admin.trips.index', compact('trips'));
     }
 

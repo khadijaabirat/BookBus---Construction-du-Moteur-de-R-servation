@@ -1,11 +1,471 @@
-@import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source '../**/*.blade.php';
-@source '../**/*.js';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+/* ═══════════════════════════════════════════════════════
+   SATAS BUS — Design System
+   ═══════════════════════════════════════════════════════ */
+
+@layer base {
+    :root {
+        --satas-red: #E63946;
+        --satas-red-dark: #C62828;
+        --satas-red-light: #FF6B6B;
+        --satas-navy: #1D3557;
+        --satas-navy-light: #264573;
+        --satas-navy-dark: #0D1F3C;
+        --satas-orange: #F4A261;
+        --satas-teal: #2A9D8F;
+        --satas-teal-light: #3BB5A7;
+        --satas-cream: #F1FAEE;
+        --satas-gold: #E9C46A;
+        --bg-primary: #F8F9FA;
+        --bg-secondary: #FFFFFF;
+        --text-primary: #1A1A2E;
+        --text-secondary: #6B7280;
+        --text-muted: #9CA3AF;
+        --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+        --shadow-glow: 0 0 40px rgba(230, 57, 70, 0.15);
+        --radius-sm: 8px;
+        --radius-md: 12px;
+        --radius-lg: 16px;
+        --radius-xl: 24px;
+        --radius-full: 9999px;
+    }
+
+    * {
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    ::selection {
+        background-color: var(--satas-red);
+        color: white;
+    }
+}
+
+@layer components {
+    /* ── Buttons ── */
+    .btn {
+        @apply inline-flex items-center justify-center gap-2 font-semibold rounded-xl transition-all duration-300 cursor-pointer select-none;
+        letter-spacing: -0.01em;
+    }
+
+    .btn-primary {
+        @apply btn px-6 py-3 text-white;
+        background: var(--satas-red);
+        box-shadow: 0 4px 14px rgba(230, 57, 70, 0.35);
+    }
+    .btn-primary:hover {
+        background: var(--satas-red-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(230, 57, 70, 0.45);
+    }
+    .btn-primary:active {
+        transform: translateY(0);
+    }
+
+    .btn-secondary {
+        @apply btn px-6 py-3 text-white;
+        background: var(--satas-navy);
+    }
+    .btn-secondary:hover {
+        background: var(--satas-navy-light);
+        transform: translateY(-2px);
+    }
+
+    .btn-outline {
+        @apply btn px-6 py-3 border-2;
+        border-color: var(--satas-red);
+        color: var(--satas-red);
+        background: transparent;
+    }
+    .btn-outline:hover {
+        background: var(--satas-red);
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    .btn-ghost {
+        @apply btn px-4 py-2 text-sm;
+        color: var(--text-secondary);
+        background: transparent;
+    }
+    .btn-ghost:hover {
+        background: rgba(0,0,0,0.05);
+        color: var(--text-primary);
+    }
+
+    .btn-sm {
+        @apply px-4 py-2 text-sm rounded-lg;
+    }
+
+    .btn-lg {
+        @apply px-8 py-4 text-lg rounded-2xl;
+    }
+
+    .btn-icon {
+        @apply btn p-3 rounded-xl;
+    }
+
+    /* ── Cards ── */
+    .card {
+        @apply rounded-2xl overflow-hidden;
+        background: white;
+        box-shadow: var(--shadow-md);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .card:hover {
+        box-shadow: var(--shadow-xl);
+    }
+    .card-body {
+        @apply p-6;
+    }
+    .card-glass {
+        @apply card;
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    /* ── Inputs ── */
+    .form-input {
+        @apply w-full px-4 py-3 rounded-xl border border-gray-200 text-base transition-all duration-300 outline-none;
+        background: var(--bg-primary);
+    }
+    .form-input:focus {
+        border-color: var(--satas-red);
+        box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.1);
+        background: white;
+    }
+    .form-input::placeholder {
+        color: var(--text-muted);
+    }
+
+    .form-select {
+        @apply form-input appearance-none cursor-pointer;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236B7280'%3E%3Cpath d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+        background-size: 24px;
+        padding-right: 40px;
+    }
+
+    .form-label {
+        @apply block text-sm font-semibold mb-2;
+        color: var(--text-primary);
+    }
+
+    .form-group {
+        @apply mb-5;
+    }
+
+    /* ── Badges ── */
+    .badge {
+        @apply inline-flex items-center gap-1 px-3 py-1 text-xs font-bold rounded-full uppercase tracking-wide;
+    }
+    .badge-standard { @apply badge bg-gray-100 text-gray-700; }
+    .badge-confort { @apply badge bg-blue-100 text-blue-700; }
+    .badge-premium { @apply badge text-white; background: linear-gradient(135deg, var(--satas-gold), #D4A03A); }
+    .badge-success { @apply badge bg-emerald-100 text-emerald-700; }
+    .badge-danger { @apply badge bg-red-100 text-red-700; }
+    .badge-warning { @apply badge bg-amber-100 text-amber-700; }
+    .badge-info { @apply badge bg-sky-100 text-sky-700; }
+
+    /* ── Navigation ── */
+    .navbar {
+        @apply sticky top-0 z-50;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    }
+    .navbar.scrolled {
+        box-shadow: var(--shadow-md);
+    }
+
+    .nav-link {
+        @apply px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200;
+        color: var(--text-secondary);
+    }
+    .nav-link:hover {
+        color: var(--satas-red);
+        background: rgba(230, 57, 70, 0.05);
+    }
+    .nav-link.active {
+        color: var(--satas-red);
+        font-weight: 600;
+    }
+
+    /* ── Section Titles ── */
+    .section-title {
+        @apply text-3xl font-bold mb-2;
+        color: var(--satas-navy);
+        letter-spacing: -0.02em;
+    }
+    .section-subtitle {
+        @apply text-lg mb-8;
+        color: var(--text-secondary);
+    }
+
+    /* ── Gradient Backgrounds ── */
+    .bg-satas-gradient {
+        background: linear-gradient(135deg, var(--satas-navy) 0%, var(--satas-navy-dark) 100%);
+    }
+    .bg-satas-hero {
+        background: linear-gradient(135deg, var(--satas-navy) 0%, #2D4A7A 50%, var(--satas-navy-dark) 100%);
+    }
+    .bg-satas-red-gradient {
+        background: linear-gradient(135deg, var(--satas-red) 0%, var(--satas-red-dark) 100%);
+    }
+
+    /* ── Seat Grid ── */
+    .seat-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+        max-width: 280px;
+    }
+    .seat {
+        @apply flex items-center justify-center text-xs font-bold rounded-lg cursor-pointer transition-all duration-200 select-none;
+        width: 48px;
+        height: 40px;
+        background: #E8EDF3;
+        color: var(--satas-navy);
+        border: 2px solid transparent;
+    }
+    .seat:hover:not(.seat-taken):not(.seat-aisle) {
+        background: rgba(230, 57, 70, 0.15);
+        border-color: var(--satas-red);
+        transform: scale(1.1);
+    }
+    .seat-selected {
+        background: var(--satas-red) !important;
+        color: white !important;
+        border-color: var(--satas-red-dark) !important;
+        box-shadow: 0 2px 8px rgba(230, 57, 70, 0.4);
+    }
+    .seat-taken {
+        background: #FEE2E2 !important;
+        color: #991B1B !important;
+        cursor: not-allowed !important;
+        opacity: 0.7;
+    }
+    .seat-aisle {
+        background: transparent !important;
+        cursor: default !important;
+        width: 20px;
+    }
+    .seat-driver {
+        background: var(--satas-navy) !important;
+        color: white !important;
+        cursor: default !important;
+        border-radius: 8px 8px 4px 4px;
+    }
+
+    /* ── Trip Card ── */
+    .trip-card {
+        @apply card;
+        border-left: 4px solid transparent;
+        transition: all 0.3s ease;
+    }
+    .trip-card:hover {
+        border-left-color: var(--satas-red);
+        transform: translateX(4px);
+    }
+
+    /* ── Step Indicator ── */
+    .step-indicator {
+        @apply flex items-center justify-center;
+    }
+    .step-dot {
+        @apply w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300;
+        background: #E5E7EB;
+        color: var(--text-muted);
+    }
+    .step-dot.active {
+        background: var(--satas-red);
+        color: white;
+        box-shadow: 0 0 0 4px rgba(230, 57, 70, 0.2);
+    }
+    .step-dot.completed {
+        background: var(--satas-teal);
+        color: white;
+    }
+    .step-line {
+        @apply h-1 flex-1 mx-2 rounded-full;
+        background: #E5E7EB;
+    }
+    .step-line.completed {
+        background: var(--satas-teal);
+    }
+
+    /* ── Toast Notifications ── */
+    .toast {
+        @apply fixed top-6 right-6 z-[100] px-6 py-4 rounded-xl text-white font-medium shadow-2xl;
+        animation: slideInRight 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        max-width: 400px;
+    }
+    .toast-success { background: var(--satas-teal); }
+    .toast-error { background: var(--satas-red); }
+    .toast-info { background: var(--satas-navy); }
+
+    /* ── Amenity Icons ── */
+    .amenity-badge {
+        @apply inline-flex items-center gap-1 px-2 py-1 text-xs rounded-md;
+        background: rgba(29, 53, 87, 0.08);
+        color: var(--satas-navy);
+    }
+
+    /* ── Price Display ── */
+    .price-tag {
+        @apply text-2xl font-extrabold;
+        color: var(--satas-red);
+    }
+    .price-tag .currency {
+        @apply text-sm font-medium ml-1;
+        color: var(--text-secondary);
+    }
+
+    /* ── Ticket ── */
+    .ticket {
+        @apply card overflow-hidden;
+        border: 2px dashed #E5E7EB;
+        position: relative;
+    }
+    .ticket::before,
+    .ticket::after {
+        content: '';
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: var(--bg-primary);
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .ticket::before { left: -12px; }
+    .ticket::after { right: -12px; }
+
+    /* ── Stats Counter ── */
+    .stat-card {
+        @apply text-center p-6;
+    }
+    .stat-number {
+        @apply text-4xl font-extrabold;
+        background: linear-gradient(135deg, var(--satas-red), var(--satas-orange));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    .stat-label {
+        @apply text-sm font-medium mt-2;
+        color: var(--text-secondary);
+    }
+}
+
+@layer utilities {
+    /* ── Animations ── */
+    .animate-float {
+        animation: float 6s ease-in-out infinite;
+    }
+    .animate-pulse-slow {
+        animation: pulse 3s ease-in-out infinite;
+    }
+    .animate-slide-up {
+        animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .animate-fade-in {
+        animation: fadeIn 0.5s ease-out;
+    }
+    .animate-scale-in {
+        animation: scaleIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .text-gradient {
+        background: linear-gradient(135deg, var(--satas-red), var(--satas-orange));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .glass {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+}
+
+/* ═══════════════════════════════════════════════════════
+   Keyframes
+   ═══════════════════════════════════════════════════════ */
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(100px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* ═══════════════════════════════════════════════════════
+   Scrollbar Styling
+   ═══════════════════════════════════════════════════════ */
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: #CBD5E1;
+    border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #94A3B8;
+}
+
+/* ═══════════════════════════════════════════════════════
+   Print Styles (for tickets)
+   ═══════════════════════════════════════════════════════ */
+@media print {
+    .no-print { display: none !important; }
+    body { background: white !important; }
+    .ticket { border: 1px solid #000 !important; box-shadow: none !important; }
 }

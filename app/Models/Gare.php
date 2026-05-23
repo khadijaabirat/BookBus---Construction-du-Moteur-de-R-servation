@@ -6,10 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Gare extends Model
 {
-    public function ville(){
+    protected $fillable = [
+        'nom',
+        'adresse',
+        'ville_id'
+    ];
+
+    public function ville()
+    {
         return $this->belongsTo(Ville::class);
-     }
-    public function etapes(){
+    }
+
+    public function etapes()
+    {
         return $this->hasMany(Etape::class);
-    } 
+    }
 }

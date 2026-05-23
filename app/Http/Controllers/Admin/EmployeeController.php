@@ -10,7 +10,7 @@ class EmployeeController extends Controller
 {
     public function index()
     {
-        $employees = Employee::all();
+        $employees = Employee::orderBy('last_name')->paginate(15);
         return view('admin.employees.index', compact('employees'));
     }
 
@@ -22,14 +22,15 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nom' => 'required|string|max:255',
-            'prenom' => 'required|string|max:255',
-            'role' => 'required|string',
-            'telephone' => 'nullable|string',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'license_number' => 'required|string|unique:employees',
+            'phone' => 'required|string',
+            'role' => 'required|in:chauffeur,administrateur',
         ]);
-
+        $validated['is_active'] = $request->boolean('is_active');
         Employee::create($validated);
-        return redirect()->route('admin.employees.index')->with('success', 'Employé créé');
+        return redirect()->route('admin.employees.index')->with('success', 'Employé ajouté avec succès');
     }
 
     public function edit(Employee $employee)
@@ -40,12 +41,13 @@ class EmployeeController extends Controller
     public function update(Request $request, Employee $employee)
     {
         $validated = $request->validate([
-            'nom' => 'required|string|max:255',
-            'prenom' => 'required|string|max:255',
-            'role' => 'required|string',
-            'telephone' => 'nullable|string',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'license_number' => 'required|string|unique:employees,license_number,' . $employee->id,
+            'phone' => 'required|string',
+            'role' => 'required|in:chauffeur,administrateur',
         ]);
-
+        $validated['is_active'] = $request->boolean('is_active');
         $employee->update($validated);
         return redirect()->route('admin.employees.index')->with('success', 'Employé mis à jour');
     }

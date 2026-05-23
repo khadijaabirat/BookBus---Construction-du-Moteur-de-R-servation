@@ -6,11 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Route extends Model
 {
-    public function etapes(){
+    protected $fillable = [
+        'nom',
+        'description'
+    ];
+
+    public function etapes()
+    {
         return $this->hasMany(Etape::class)->orderBy('ordre');
     }
+
     public function programmes()
-{
-    return $this->hasMany(Programme::class);
-}
+    {
+        return $this->hasMany(Programme::class);
+    }
 }

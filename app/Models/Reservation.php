@@ -22,7 +22,8 @@ class Reservation extends Model
         'total_price',
         'cancelled_at',
         'refund_amount',
-        'payment_method'
+        'payment_method',
+        'payment_proof'
     ];
 
     protected $casts = [

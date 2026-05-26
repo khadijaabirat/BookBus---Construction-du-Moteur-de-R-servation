@@ -50,7 +50,9 @@ class ReservationController extends Controller
             'seats.*' => 'integer|min:1',
             'snack_box' => 'nullable|boolean',
             'insurance' => 'nullable|boolean',
-            'promo_code' => 'nullable|string'
+            'promo_code' => 'nullable|string',
+            'payment_method' => 'required|in:card,cash,virement',
+            'payment_proof' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
         ]);
 
         $segment = Segment::with('bus')->findOrFail($segment_id);
@@ -87,6 +89,14 @@ class ReservationController extends Controller
         }
 
         $newReservationIds = [];
+        $paymentMethod = $request->input('payment_method', 'card');
+        $statut = in_array($paymentMethod, ['cash', 'virement']) ? 'En attente' : 'Confirmé';
+
+        // Handle payment proof upload
+        $proofPath = null;
+        if ($request->hasFile('payment_proof')) {
+            $proofPath = $request->file('payment_proof')->store('payment_proofs', 'public');
+        }
 
         foreach ($request->seats as $seatNumber) {
             // Check availability
@@ -103,7 +113,7 @@ class ReservationController extends Controller
             $res = Reservation::create([
                 'reference' => 'SATAS-' . strtoupper(Str::random(6)),
                 'date_reservation' => now(),
-                'statut' => 'Confirmé',
+                'statut' => $statut,
                 'siege_numero' => $seatNumber,
                 'user_id' => auth()->id(),
                 'segment_id' => $segment_id,
@@ -113,7 +123,8 @@ class ReservationController extends Controller
                 'base_price' => $basePricePerSeat,
                 'extras_price' => $extrasPerSeat,
                 'total_price' => $grandTotal / $totalSeats, // Distribute evenly
-                'payment_method' => 'card'
+                'payment_method' => $paymentMethod,
+                'payment_proof'  => $proofPath,
             ]);
             
             $newReservationIds[] = $res->id;
@@ -155,7 +166,14 @@ class ReservationController extends Controller
             return back()->with('error', 'Cette réservation est déjà annulée.');
         }
 
-        $departureTime = \Carbon\Carbon::parse($reservation->segment->programme->jour_depart . ' ' . $reservation->segment->programme->heure_depart);
+        $jourDepart = $reservation->segment->programme->jour_depart;
+        $heureDepart = $reservation->segment->programme->heure_depart;
+        
+        if (strpos($jourDepart, ' ') !== false) {
+            $departureTime = \Carbon\Carbon::parse($jourDepart);
+        } else {
+            $departureTime = \Carbon\Carbon::parse($jourDepart . ' ' . $heureDepart);
+        }
         
         if (now()->isAfter($departureTime)) {
             return back()->with('error', 'Impossible d\'annuler un trajet passé.');
@@ -181,6 +199,22 @@ class ReservationController extends Controller
         ]);
 
         return back()->with('success', "Réservation annulée. Vous serez remboursé de $refundAmount MAD ($refundPercentage%).");
+    }
+
+    public function verifyPromo(Request $request)
+    {
+        $promo = PromoCode::where('code', strtoupper($request->code))
+            ->where('is_active', true)
+            ->where('valid_from', '<=', now())
+            ->where('valid_until', '>=', now())
+            ->whereColumn('used_count', '<', 'max_uses')
+            ->first();
+
+        if ($promo) {
+            return response()->json(['valid' => true, 'discount_percent' => $promo->discount_percent]);
+        }
+
+        return response()->json(['valid' => false, 'message' => 'Code invalide ou expiré.']);
     }
 
     public function downloadTicket($id)

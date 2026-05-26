@@ -8,11 +8,17 @@ use Illuminate\Http\Request;
 
 class BookingController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $bookings = Reservation::with(['user', 'segment.depart.gare.ville', 'segment.arrivee.gare.ville'])
-            ->orderBy('created_at', 'desc')
-            ->paginate(15);
+        $query = Reservation::with(['user', 'segment.depart.gare.ville', 'segment.arrivee.gare.ville'])
+            ->orderBy('created_at', 'desc');
+
+        $allowedStatuts = ['Confirmé', 'Annulé', 'En attente'];
+        if ($request->filled('statut') && in_array($request->statut, $allowedStatuts)) {
+            $query->where('statut', $request->statut);
+        }
+
+        $bookings = $query->paginate(15)->withQueryString();
         return view('admin.bookings.index', compact('bookings'));
     }
 
@@ -21,6 +27,18 @@ class BookingController extends Controller
         $booking = Reservation::with(['user', 'segment.depart.gare.ville', 'segment.arrivee.gare.ville', 'segment.programme', 'segment.bus'])
             ->findOrFail($id);
         return view('admin.bookings.show', compact('booking'));
+    }
+
+    public function validatePayment($id)
+    {
+        $reservation = Reservation::findOrFail($id);
+
+        if ($reservation->statut !== 'En attente') {
+            return back()->with('error', 'Cette réservation n\'est pas en attente.');
+        }
+
+        $reservation->update(['statut' => 'Confirmé']);
+        return back()->with('success', 'Paiement validé. Réservation confirmée.');
     }
 
     public function cancel($id)

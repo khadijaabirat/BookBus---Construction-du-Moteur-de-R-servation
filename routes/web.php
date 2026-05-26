@@ -26,6 +26,7 @@ Route::get('/search/results', [TripController::class, 'search'])->name('search.t
     Route::get('/my-bookings/{id}', [ReservationController::class, 'show'])->name('bookings.show');
     Route::post('/my-bookings/{id}/cancel', [ReservationController::class, 'cancel'])->name('bookings.cancel');
     Route::get('/my-bookings/{id}/download', [ReservationController::class, 'downloadTicket'])->name('bookings.download');
+    Route::post('/promo/verify', [ReservationController::class, 'verifyPromo'])->name('promo.verify');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -52,6 +53,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('bookings', [AdminBookingController::class, 'index'])->name('bookings.index');
     Route::get('bookings/{id}', [AdminBookingController::class, 'show'])->name('bookings.show');
     Route::post('bookings/{id}/cancel', [AdminBookingController::class, 'cancel'])->name('bookings.cancel');
+    Route::post('bookings/{id}/validate', [AdminBookingController::class, 'validatePayment'])->name('bookings.validate');
 
     Route::get('assignments/create', [AssignmentController::class, 'create'])->name('assignments.create');
     Route::post('assignments', [AssignmentController::class, 'store'])->name('assignments.store');

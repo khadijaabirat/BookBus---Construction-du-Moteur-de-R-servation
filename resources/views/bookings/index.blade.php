@@ -72,6 +72,8 @@
                                     @else
                                         <span class="badge bg-green-100 text-green-800"><i class="fa-solid fa-check mr-1"></i> Confirmé</span>
                                     @endif
+                                @elseif($booking->statut === 'En attente')
+                                    <span class="badge bg-orange-100 text-orange-800"><i class="fa-solid fa-clock mr-1"></i> En attente de validation</span>
                                 @elseif($booking->statut === 'Annulé')
                                     <span class="badge bg-red-100 text-red-800"><i class="fa-solid fa-xmark mr-1"></i> Annulé</span>
                                 @endif

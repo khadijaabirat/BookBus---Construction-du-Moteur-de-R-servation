@@ -234,8 +234,7 @@ resources/
 ---
 
 
-## Application Preview
-<img width="1763" height="2894" alt="Capture d’écran_26-5-2026_134929_127 0 0 1" src="https://github.com/user-attachments/assets/e08ca159-7b7f-4e3d-b0e8-ebc024095cf5" />
+## Application Preview 
 <img width="1763" height="2894" alt="Capture d’écran_26-5-2026_134929_127 0 0 1" src="https://github.com/user-attachments/assets/5897f02d-a10e-4a1c-866b-0d10baef1b3e" />
  <img width="1763" height="938" alt="Capture d’écran_23-5-2026_174836_127 0 0 1" src="https://github.com/user-attachments/assets/192e871e-9296-41d6-ae09-ec2f91868888" />
 <img width="1763" height="1214" alt="Capture d’écran_23-5-2026_175342_127 0 0 1" src="https://github.com/user-attachments/assets/160b8859-7708-4f0c-93d8-a200ce0ae341" />

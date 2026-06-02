@@ -235,14 +235,36 @@ resources/
 
 
 ## Application Preview
-<img width="1763" height="2534" alt="Capture d’écran_23-5-2026_184018_127 0 0 1" src="https://github.com/user-attachments/assets/59ae5dd7-861f-4500-99be-22ac2d9a6dc6" />
-<img width="1763" height="1362" alt="Capture d’écran_23-5-2026_17535_127 0 0 1" src="https://github.com/user-attachments/assets/130cf769-3987-4dbd-9d48-2507a7d3b068" />
-<img width="1763" height="938" alt="Capture d’écran_23-5-2026_174836_127 0 0 1" src="https://github.com/user-attachments/assets/0cb29a97-447f-4d05-92a5-66d5490d85bf" />
-<img width="1763" height="1214" alt="Capture d’écran_23-5-2026_175342_127 0 0 1" src="https://github.com/user-attachments/assets/9c086adf-4d5a-4fd5-806e-ea528993231b" />
-<img width="740" height="861" alt="Capture d’écran 2026-05-23 181436" src="https://github.com/user-attachments/assets/e2b8f7cc-67dd-48e8-8bfe-b2969970566b" />
-<img width="1763" height="971" alt="Capture d’écran_23-5-2026_181655_127 0 0 1" src="https://github.com/user-attachments/assets/c19d62c2-b93e-4954-aa21-52acd02e097e" />
-<img width="1763" height="1362" alt="Capture d’écran_23-5-2026_193329_127 0 0 1" src="https://github.com/user-attachments/assets/eeca37e1-ddbc-4be4-8088-f5cf7f3469bc" />
-<img width="1763" height="2534" alt="Capture d’écran_23-5-2026_184018_127 0 0 1" src="https://github.com/user-attachments/assets/510da0a2-64da-43d1-b4ac-07d74aedaefc" />
+<img width="1763" height="2894" alt="Capture d’écran_26-5-2026_134929_127 0 0 1" src="https://github.com/user-attachments/assets/e08ca159-7b7f-4e3d-b0e8-ebc024095cf5" />
+<img width="1763" height="2894" alt="Capture d’écran_26-5-2026_134929_127 0 0 1" src="https://github.com/user-attachments/assets/5897f02d-a10e-4a1c-866b-0d10baef1b3e" />
+ <img width="1763" height="938" alt="Capture d’écran_23-5-2026_174836_127 0 0 1" src="https://github.com/user-attachments/assets/192e871e-9296-41d6-ae09-ec2f91868888" />
+<img width="1763" height="1214" alt="Capture d’écran_23-5-2026_175342_127 0 0 1" src="https://github.com/user-attachments/assets/160b8859-7708-4f0c-93d8-a200ce0ae341" />
+<img width="1763" height="1000" alt="Capture d’écran_23-5-2026_20628_127 0 0 1" src="https://github.com/user-attachments/assets/462f643a-7d1d-4cd2-8cc4-c81e6c25f31c" />
+<img width="1763" height="1075" alt="Capture d’écran_23-5-2026_2088_127 0 0 1" src="https://github.com/user-attachments/assets/49fbe611-e88e-4e1c-a41b-b1b596a59568" />
+<img width="1763" height="971" alt="Capture d’écran_23-5-2026_212839_127 0 0 1" src="https://github.com/user-attachments/assets/050cd44d-d3fb-40e4-94f5-94e5e70b06dd" />
+<img width="1763" height="1033" alt="Capture d’écran_23-5-2026_212926_127 0 0 1" src="https://github.com/user-attachments/assets/6238a378-b88a-4ddd-8b35-d886aa531fd4" />
+<img width="1763" height="971" alt="Capture d’écran_23-5-2026_212954_127 0 0 1" src="https://github.com/user-attachments/assets/9414984d-043a-4f85-8efd-852937ebbb6d" />
+<img width="1763" height="1385" alt="Capture d’écran_23-5-2026_213222_127 0 0 1" src="https://github.com/user-attachments/assets/b9759168-fb08-4f88-ac05-afb7891ccfd3" />
+<img width="1763" height="971" alt="Capture d’écran_23-5-2026_213950_127 0 0 1" src="https://github.com/user-attachments/assets/1f8c4dfc-438e-447a-966c-eba22697d073" />
+<img width="1763" height="981" alt="Capture d’écran_23-5-2026_215848_127 0 0 1" src="https://github.com/user-attachments/assets/852d9e63-eb9e-4039-81af-6f665567dd8c" />
+<img width="1763" height="971" alt="Capture d’écran_23-5-2026_21599_127 0 0 1" src="https://github.com/user-attachments/assets/9017f0c0-bee5-46bb-a164-9c4ea2eeccec" />
+<img width="1763" height="1811" alt="Capture d’écran_23-5-2026_22033_127 0 0 1" src="https://github.com/user-attachments/assets/f399d2ae-f19d-4996-b4b3-4dba79afe24a" />
+<img width="1763" height="844" alt="Capture d’écran_24-5-2026_155248_127 0 0 1" src="https://github.com/user-attachments/assets/b6297493-5fde-43f5-b809-3143aa580455" />
+<img width="1763" height="844" alt="Capture d’écran_24-5-2026_155310_127 0 0 1" src="https://github.com/user-attachments/assets/fc8d03ed-c580-4eac-b5fa-e356deece7b5" />
+<img width="1763" height="844" alt="Capture d’écran_24-5-2026_155559_127 0 0 1" src="https://github.com/user-attachments/assets/8cd29c92-7196-47d0-8dfc-18e44266339e" />
+<img width="1763" height="844" alt="Capture d’écran_24-5-2026_155613_127 0 0 1" src="https://github.com/user-attachments/assets/a266af07-042e-4593-85c4-f020634f1526" />
+<img width="1763" height="844" alt="Capture d’écran_24-5-2026_155720_127 0 0 1" src="https://github.com/user-attachments/assets/e3abb7bd-0d20-4b53-9ea9-1628f25d768d" />
+<img width="1763" height="844" alt="Capture d’écran_24-5-2026_155744_127 0 0 1" src="https://github.com/user-attachments/assets/dbab9954-4943-4a69-b8e7-5741a4a992fa" />
+<img width="1763" height="844" alt="Capture d’écran_24-5-2026_16127_127 0 0 1" src="https://github.com/user-attachments/assets/99fa5ade-2d67-44ca-9570-6ea6b2348fa7" />
+<img width="1763" height="844" alt="Capture d’écran_24-5-2026_16334_127 0 0 1" src="https://github.com/user-attachments/assets/73459d42-d518-4e17-8a3a-b70194534970" />
+<img width="1763" height="844" alt="Capture d’écran_24-5-2026_16422_127 0 0 1" src="https://github.com/user-attachments/assets/4baeaef4-0ac3-43b0-a9bb-372b83148891" />
+<img width="1763" height="971" alt="Capture d’écran_24-5-2026_222829_127 0 0 1" src="https://github.com/user-attachments/assets/f8599827-d6b9-4003-b4d9-e2516e36d62f" />
+<img width="1763" height="844" alt="Capture d’écran_24-5-2026_223149_127 0 0 1" src="https://github.com/user-attachments/assets/45bdec2b-c7fa-4293-96a3-f96acaa26565" />
+<img width="1763" height="844" alt="Capture d’écran_24-5-2026_22320_127 0 0 1" src="https://github.com/user-attachments/assets/3f027782-c282-44fe-b2f5-22cf3483c3e4" />
+<img width="1763" height="844" alt="Capture d’écran_24-5-2026_223251_127 0 0 1" src="https://github.com/user-attachments/assets/783f2594-a917-42ff-af66-74add18f7bd5" />
+<img width="1763" height="844" alt="Capture d’écran_24-5-2026_22335_127 0 0 1" src="https://github.com/user-attachments/assets/abeed53d-01e5-4075-af62-b79624606294" />
+<img width="1763" height="844" alt="Capture d’écran_24-5-2026_223349_127 0 0 1" src="https://github.com/user-attachments/assets/a1d69370-fb4a-4d79-8269-39447bdba275" />
+
 
 
 **Khadija Abirat**
